@@ -106,6 +106,7 @@ public class ControllerTest {
         assertTrue(result.getTotalVAT() == expected.getTotalVAT(), "The total VAT is not the same");
         assertTrue(result.getPayment() == expected.getPayment(), "The payment is not the same");
         assertTrue(result.getChange() == expected.getChange(), "The change is not the same");
+        //some bug here or something I dont understand
         compareLists(result.getCurrentItemList(), expected.getCurrentItemList());
     }
 

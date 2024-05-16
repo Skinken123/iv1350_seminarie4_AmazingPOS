@@ -24,9 +24,10 @@ public class ExternalInventorySystem {
             return new ItemDTO(22.5, itemIdentifier, "Bread", "A loaf of Pågenslimpa", 0.12, 1);
         } else if (itemIdentifier == 3) {
             return new ItemDTO(36.90, itemIdentifier, "Steak", "A a premium oxfile produced in Sweden", 0.12, 1);
-        } else {
+        } else if (itemIdentifier == 4) {
             return new ItemDTO(75.90, itemIdentifier, "Cheese", "A block of Greve cheese", 0.12, 1);
         }
+        return null;
     }
 
     /**
