@@ -21,6 +21,9 @@ import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.AfterEach;
 
+/**
+ * This is the class that will test all of the non constructor/get/set methods in the Controller class.
+ */
 public class ControllerTest {
     private Controller controller;  
     private ReceiptPrinter printer;
@@ -29,6 +32,9 @@ public class ControllerTest {
     private Sale newSale;
     List<ItemDTO> itemList;
 
+    /**
+     * This method sets up the test class before each test method is run.
+     */
     @BeforeEach
     public void setUp() {
         ExternalSystemsCreator creator = new ExternalSystemsCreator();
@@ -39,6 +45,10 @@ public class ControllerTest {
         controller = new Controller(creator, printer);
     }  
 
+    /**
+     * This method test the enterNewItem method in the Controller class.
+     * It creates a test object which is the expcted return of the method and compares it to the actual return of the method.
+     */
     @Test
     public void testEnterNewItem() {
         controller.startSale();
@@ -56,6 +66,10 @@ public class ControllerTest {
         compareLists(result.getCurrentItemList(), expected.getCurrentItemList());
     }
 
+    /**
+     * This method test the endSale method in the Controller class.
+     * It makes sure that the total price is correct by simulating a small sale scenario and comparing the expected cost to the one retuned by the method.
+     */
     @Test
     public void testEndSale() {
         controller.startSale();
@@ -67,6 +81,10 @@ public class ControllerTest {
         assertTrue(result == expected, "The total price is not the same");
     }
 
+    /**
+     * This method test the payment method in the Controller class.
+     * It simulates a shot sale scenario and compares the expected receipt to the one returned by the method.
+     */
     @Test
     public void testPayment(){
         controller.startSale();
@@ -91,6 +109,9 @@ public class ControllerTest {
         compareLists(result.getCurrentItemList(), expected.getCurrentItemList());
     }
 
+    /**
+     * This method runs after each test to make sure every test starts clean and is not impacted by previous tests.
+     */
     @AfterEach
     public void tearDown() {
         controller = null;
@@ -101,7 +122,12 @@ public class ControllerTest {
         itemList = null;
     }
 
-    void compareLists(List<ItemDTO> result, List<ItemDTO> expected) {
+    /**
+     * This method compares two lists of ItemDTO objects and checks if their elements are the same.
+     * @param result is a list of ItemDTO objects.
+     * @param expected is a list if ItemDTO objects.
+     */
+    private void compareLists(List<ItemDTO> result, List<ItemDTO> expected) {
         if (result.size() != expected.size()) {
             fail("The item list is not the same");
         }
