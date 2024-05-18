@@ -15,9 +15,19 @@ public class ExternalInventorySystem {
      * In order to test diffrent scenarios the program we will return different items depending on the itemIdentifier.
      * 
      * @param itemIdentifier The identifier of the item scanned by the cashier.
+     * @throws ItemIdentifierDoesNotExistException 
+     * @throws DatabaseFailureException 
      */
-    public ItemDTO requestItemData(int itemIdentifier) {
+    public ItemDTO requestItemData(int itemIdentifier) throws ItemIdentifierDoesNotExistException, DatabaseFailureException {
         //some code that fetches the item data from the inventory system
+
+        if (itemIdentifier == 10){
+            throw new DatabaseFailureException("System failure, could not fetch item data from the inventory system.");
+        }
+        else if (itemIdentifier < 1 || itemIdentifier > 4) {
+            throw new ItemIdentifierDoesNotExistException(itemIdentifier);
+        }
+        
         if (itemIdentifier == 1) {
             return new ItemDTO(35, itemIdentifier, "Tomato", "A box of red tomatos", 0.12, 1);
         } else if (itemIdentifier == 2) {

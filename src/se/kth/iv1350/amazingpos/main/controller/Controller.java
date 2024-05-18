@@ -1,16 +1,21 @@
 package se.kth.iv1350.amazingpos.main.controller;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
+import se.kth.iv1350.amazingpos.main.integration.DatabaseFailureException;
 import se.kth.iv1350.amazingpos.main.integration.ExternalAccountingSystem;
 import se.kth.iv1350.amazingpos.main.integration.ExternalInventorySystem;
 import se.kth.iv1350.amazingpos.main.integration.ExternalSystemsCreator;
+import se.kth.iv1350.amazingpos.main.integration.ItemIdentifierDoesNotExistException;
 import se.kth.iv1350.amazingpos.main.integration.ReceiptPrinter;
 import se.kth.iv1350.amazingpos.main.model.Receipt;
 import se.kth.iv1350.amazingpos.main.model.Sale;
 import se.kth.iv1350.amazingpos.main.model.dto.ItemDTO;
 import se.kth.iv1350.amazingpos.main.model.dto.ItemListDTO;
 import se.kth.iv1350.amazingpos.main.model.dto.ReceiptDTO;
+import se.kth.iv1350.amazingpos.main.util.FileLogger;
 
 /**
  * This is the application's only controller. All calls to the model pass through here.
@@ -20,6 +25,7 @@ public class Controller {
     private ExternalAccountingSystem externalAS;
     private ExternalInventorySystem externalIS;
     private Sale newSale;
+    private FileLogger logger;
 
     /**
      * Creates a new instance of the controller.
@@ -27,10 +33,11 @@ public class Controller {
      * @param creator The creator of the external systems.
      * @param printer The printer that will print the receipt.
      */
-    public Controller(ExternalSystemsCreator creator, ReceiptPrinter printer) {
+    public Controller(ExternalSystemsCreator creator, ReceiptPrinter printer) throws IOException {
         this.printer = printer;
         this.externalAS = creator.getExternalAS();
         this.externalIS = creator.getExternalIS();
+        this.logger = new FileLogger();
     }
 
     /**
@@ -51,11 +58,20 @@ public class Controller {
      * @param quantity The quantity of the item that is to be entered.
      * @return The DTO of the current receipt information after the item has been entered. 
      * The dto will be used by the view to display the updated sale infromation to the cashier and customer.
+     * @throws GenericIssueException 
      */
-    public ReceiptDTO enterNewItem(int itemIdentifier){
-        ItemDTO newItem = externalIS.requestItemData(itemIdentifier);
-        ReceiptDTO currenReceiptDTO = newSale.uppdateItemList(newItem);
-        return currenReceiptDTO;
+    public ReceiptDTO enterNewItem(int itemIdentifier) throws ItemIdentifierDoesNotExistException, GenericIssueException{
+        try{
+            ItemDTO newItem = externalIS.requestItemData(itemIdentifier);
+            ReceiptDTO currenReceiptDTO = newSale.uppdateItemList(newItem);
+            return currenReceiptDTO;
+        }
+        catch(DatabaseFailureException databaseExc)
+        {
+            logger.logException(databaseExc);
+            throw new GenericIssueException("The item could not be entered to the sale", databaseExc);
+        }
+        
     }
 
     /**
