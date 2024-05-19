@@ -2,6 +2,7 @@ package se.kth.iv1350.amazingpos.main.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import se.kth.iv1350.amazingpos.main.integration.DatabaseFailureException;
@@ -12,6 +13,7 @@ import se.kth.iv1350.amazingpos.main.integration.ItemIdentifierDoesNotExistExcep
 import se.kth.iv1350.amazingpos.main.integration.ReceiptPrinter;
 import se.kth.iv1350.amazingpos.main.model.Receipt;
 import se.kth.iv1350.amazingpos.main.model.Sale;
+import se.kth.iv1350.amazingpos.main.model.SaleObserver;
 import se.kth.iv1350.amazingpos.main.model.dto.ItemDTO;
 import se.kth.iv1350.amazingpos.main.model.dto.ItemListDTO;
 import se.kth.iv1350.amazingpos.main.model.dto.ReceiptDTO;
@@ -26,6 +28,7 @@ public class Controller {
     private ExternalInventorySystem externalIS;
     private Sale newSale;
     private FileLogger logger;
+    private List<SaleObserver> saleObservers = new ArrayList<>();
 
     /**
      * Creates a new instance of the controller.
@@ -46,6 +49,7 @@ public class Controller {
 
     public void startSale() {
         newSale = new Sale();
+        newSale.addSaleObservers(saleObservers);
     }
 
     /**
@@ -110,5 +114,14 @@ public class Controller {
      */
     public void printReceipt(ReceiptDTO receiptDTO) {
         printer.printReceipt(receiptDTO);
+    }
+
+    /**
+     * Adds a new observer to the list of observers. The observer will be notified when a sale has been paid for.
+     * 
+     * @param observer The observer to be added to the list of observers.
+     */
+    public void addSaleObserver(SaleObserver observer) {
+        saleObservers.add(observer);
     }
 }

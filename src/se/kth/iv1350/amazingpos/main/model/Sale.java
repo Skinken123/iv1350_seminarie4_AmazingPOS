@@ -12,6 +12,7 @@ import se.kth.iv1350.amazingpos.main.model.dto.ReceiptDTO;
 public class Sale {
     private Receipt newReceipt;
     private List<ItemDTO> itemList = new ArrayList<>();
+    private List<SaleObserver> saleObservers = new ArrayList<>();
 
     /**
      * Creates a new instance of a sale and creates a instance of the receipt when a new sale is started.
@@ -73,7 +74,7 @@ public class Sale {
     }
 
     /**
-     * Gets the final receiptDTO with the final sale information.
+     * Gets the final receiptDTO with the final sale information. This method is called when the customer has payed for the sale and the sale is finished.
      * 
      * @param payment The payment made by the customer.
      * @param change The change that will be given to the customer.
@@ -81,6 +82,27 @@ public class Sale {
      */
 
     public ReceiptDTO getFinalReceiptDTO(double payment, double change) {
-        return newReceipt.setSaleTimeAndPayment(payment, change);
+        ReceiptDTO finalReceiptDTO = newReceipt.setSaleTimeAndPayment(payment, change);
+        double totalPrice = getTotalPrice();
+        notifyObservers(totalPrice);
+        return finalReceiptDTO;
+    }
+
+    /**
+     * Notifies all sale observers that a sale has been concluded and the total sale profits need to be updated.
+     */
+    private void notifyObservers(double price) {
+        for (SaleObserver saleObserver : saleObservers) {
+            saleObserver.updateSaleProfits(price);
+        }
+    }
+
+    /**
+     * Adds a list of sale observers to the list of sale observers.
+     * 
+     * @param saleObservers The list of sale observers to be added to the list of sale observers.
+     */
+    public void addSaleObservers(List<SaleObserver> saleObserversFromController) {
+        saleObservers.addAll(saleObserversFromController);
     }
 }

@@ -30,6 +30,8 @@ public class View {
      */
     public View(Controller contr) throws IOException {
         this.contr = contr;
+        contr.addSaleObserver(new TotalRevenueView());
+        contr.addSaleObserver(new TotalRevenueFileOutput());
         this.logger = new FileLogger();
     }
 
@@ -55,7 +57,7 @@ public class View {
             }
             catch(GenericIssueException exc){
                 String result = errorMessages.createFormattedErrorMessage("Could not register item");
-                System.out.println(result + "\n");
+                System.out.println(result);
             }
             catch(ItemIdentifierDoesNotExistException exc){
                 String result = errorMessages.createFormattedErrorMessage("Could not register item");
@@ -87,6 +89,13 @@ public class View {
             ReceiptDTO finaReceiptDTO = contr.payment(payment);
 
             contr.printReceipt(finaReceiptDTO);
+
+            //Second test run just for testing the observer pattern.
+            contr.startSale();
+            contr.enterNewItem(1);
+            contr.enterNewItem(2);
+            contr.endSale();
+            contr.payment(200);
         }
         catch(ItemIdentifierDoesNotExistException exc){
             String result = errorMessages.createFormattedErrorMessage("Could not register item with itemidentifier " + exc.getItemIdentifier() + " because it does not exist in the database.");

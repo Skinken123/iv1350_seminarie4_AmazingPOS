@@ -21,7 +21,7 @@ public class ErrorMessageFormatter {
         formattedErrorMesssageBuilder.append(errorMessage);
         formattedErrorMesssageBuilder.append("\n");
         formattedErrorMesssageBuilder.append("Time and date of ERROR: ");
-        formattedErrorMesssageBuilder.append(createStringForTimeAndDate());
+        formattedErrorMesssageBuilder.append(createStringForTimeAndDate() + "\n");
         //System.out.println(formattedErrorMesssageBuilder);
         return formattedErrorMesssageBuilder.toString();
     }
