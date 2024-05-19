@@ -1,6 +1,8 @@
 package se.kth.iv1350.amazingpos.test.integration;
 
+import se.kth.iv1350.amazingpos.main.integration.DatabaseFailureException;
 import se.kth.iv1350.amazingpos.main.integration.ExternalInventorySystem;
+import se.kth.iv1350.amazingpos.main.integration.ItemIdentifierDoesNotExistException;
 import se.kth.iv1350.amazingpos.main.model.dto.ItemDTO;
 
 import org.junit.jupiter.api.Test;
@@ -27,9 +29,11 @@ public class ExternalInventorySystemTest {
      * This method tests the requestItemData method in the ExternalInventorySystem class.
      * It creates a test object which is the expcted return of the method and compares it to the actual return of the method.
      * It comfirms if the return is correct by each individual attribute of the two objects.
+     * @throws DatabaseFailureException 
+     * @throws ItemIdentifierDoesNotExistException 
      */
     @Test
-    public void testRequestItemDataCorrectItemIdentifier() {
+    public void testRequestItemDataCorrectItemIdentifier() throws ItemIdentifierDoesNotExistException, DatabaseFailureException {
         ItemDTO expected = new ItemDTO(35, 1, "Tomato", "A box of red tomatos", 0.12, 1);
         ItemDTO result = externalInventorySystem.requestItemData(1);
 
@@ -45,9 +49,11 @@ public class ExternalInventorySystemTest {
      * It creates a test object which is the not the expcted return of the method and compares it to the actual return of the method.
      * It comfirms that the return is not equal to the incorrect object created, by checking each individual attribute of the two objects.
      * We ignore testing the taxVAT and price since these attributes can be the same in multiple items, but the 3 other attribute are always unique.
+     * @throws DatabaseFailureException 
+     * @throws ItemIdentifierDoesNotExistException 
      */
     @Test
-    public void testRequestItemDataIncorrectItemIdentifier() {
+    public void testRequestItemDataIncorrectItemIdentifier() throws ItemIdentifierDoesNotExistException, DatabaseFailureException {
         ItemDTO expected = new ItemDTO(35, 1, "Tomato", "A box of red tomatos", 0.12, 1);
         ItemDTO result = externalInventorySystem.requestItemData(3);
 

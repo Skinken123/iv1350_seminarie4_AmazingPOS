@@ -17,7 +17,7 @@ public class ErrorMessageFormatter {
      */
     void createFormattedErrorMessage(String errorMessage) {
         StringBuilder formattedErrorMesssageBuilder = new StringBuilder();
-        formattedErrorMesssageBuilder.append(createTime());
+        formattedErrorMesssageBuilder.append(createStringForTimeAndDate());
         formattedErrorMesssageBuilder.append(", REPORTED ERROR: ");
         formattedErrorMesssageBuilder.append(errorMessage);
         System.out.println(formattedErrorMesssageBuilder);
@@ -28,9 +28,10 @@ public class ErrorMessageFormatter {
      * 
      * @return The current date and time as a string.
      */
-    private String createTime() {
-        LocalDateTime now = LocalDateTime.now();
+    private String createStringForTimeAndDate() {
+        LocalDateTime currentDateAndTime = LocalDateTime.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.SHORT);
-        return now.format(formatter);
+        String formattedDateTime = currentDateAndTime.format(formatter);
+        return formattedDateTime;
     }
 }

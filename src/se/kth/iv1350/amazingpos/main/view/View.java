@@ -10,7 +10,7 @@ import se.kth.iv1350.amazingpos.main.controller.GenericIssueException;
 import se.kth.iv1350.amazingpos.main.integration.ItemIdentifierDoesNotExistException;
 import se.kth.iv1350.amazingpos.main.model.dto.ItemDTO;
 import se.kth.iv1350.amazingpos.main.model.dto.ReceiptDTO;
-import se.kth.iv1350.amazingpos.main.util.FileLogger;
+import se.kth.iv1350.amazingpos.main.utility.FileLogger;
 
 /**
  * Represents the view of the program. This class represents the user interface which we will not code in this project.
@@ -57,7 +57,7 @@ public class View {
             }
             catch(ItemIdentifierDoesNotExistException exc){
                 errorMessages.createFormattedErrorMessage("Could not register item");
-                logger.logException(exc);
+                logger.logExceptionToFile(exc);
             }
 
             try{
@@ -68,7 +68,7 @@ public class View {
             }
             catch(ItemIdentifierDoesNotExistException exc){
                 errorMessages.createFormattedErrorMessage("Could not register item with itemidentifier " + exc.getItemIdentifier() + " because it does not exist in the database.");
-                logger.logException(exc);
+                logger.logExceptionToFile(exc);
             }
             catch(GenericIssueException exc){
                 errorMessages.createFormattedErrorMessage("Could not register item");
@@ -84,11 +84,11 @@ public class View {
         }
         catch(ItemIdentifierDoesNotExistException exc){
             errorMessages.createFormattedErrorMessage("Could not register item with itemidentifier " + exc.getItemIdentifier() + " because it does not exist in the database.");
-            logger.logException(exc);
+            logger.logExceptionToFile(exc);
         }
         catch(Exception exc){
             errorMessages.createFormattedErrorMessage("An error has occured. Please try again.");
-            logger.logException(exc);
+            logger.logExceptionToFile(exc);
         }
     }
 
