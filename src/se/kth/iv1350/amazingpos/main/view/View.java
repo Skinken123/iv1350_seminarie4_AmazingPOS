@@ -55,7 +55,7 @@ public class View {
             }
             catch(GenericIssueException exc){
                 String result = errorMessages.createFormattedErrorMessage("Could not register item");
-                System.out.println(result);
+                System.out.println(result + "\n");
             }
             catch(ItemIdentifierDoesNotExistException exc){
                 String result = errorMessages.createFormattedErrorMessage("Could not register item");

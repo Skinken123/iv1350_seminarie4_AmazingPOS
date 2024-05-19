@@ -28,7 +28,6 @@ public class Main {
         }
         catch(IOException exc){
             System.out.println("An error has occured. Please try starting the application again.");
-            exc.printStackTrace();
         }
     }
 }

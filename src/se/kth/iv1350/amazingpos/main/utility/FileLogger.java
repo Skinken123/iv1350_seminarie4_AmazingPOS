@@ -13,10 +13,10 @@ import java.time.format.FormatStyle;
  */
 public class FileLogger {
     private static final String LOG_FILE_NAME = "amazingpos-errorlog.txt";
-    private PrintWriter logFile;
+    private PrintWriter fileToLogTo;
     
     public FileLogger() throws IOException {
-        logFile = new PrintWriter(new FileWriter(LOG_FILE_NAME, true), true);
+        fileToLogTo = new PrintWriter(new FileWriter(LOG_FILE_NAME, true), true);
     }
     
     /**
@@ -29,9 +29,9 @@ public class FileLogger {
         logMessageBuilder.append(createStringForTimeAndDate());
         logMessageBuilder.append(", Exception was thrown: ");
         logMessageBuilder.append(exception.getMessage());
-        logFile.println(logMessageBuilder);
-        exception.printStackTrace(logFile);
-        logFile.println("\n");
+        fileToLogTo.println(logMessageBuilder);
+        exception.printStackTrace(fileToLogTo);
+        fileToLogTo.println("\n");
     }
 
     /**
