@@ -50,13 +50,16 @@ public class View {
                 System.out.println("Sending an itemidentifier which should trigger a database faliure.");
                 currReceiptDTO = contr.enterNewItem(10);
                 printNewItem(currReceiptDTO,10);
-                errorMessages.createFormattedErrorMessage("Created an item even though the database should not be working, exception failed.");
+                String result = errorMessages.createFormattedErrorMessage("Created an item even though the database should not be working, exception failed.");
+                System.out.println(result);
             }
             catch(GenericIssueException exc){
-                errorMessages.createFormattedErrorMessage("Could not register item");
+                String result = errorMessages.createFormattedErrorMessage("Could not register item");
+                System.out.println(result);
             }
             catch(ItemIdentifierDoesNotExistException exc){
-                errorMessages.createFormattedErrorMessage("Could not register item");
+                String result = errorMessages.createFormattedErrorMessage("Could not register item");
+                System.out.println(result);
                 logger.logExceptionToFile(exc);
             }
 
@@ -64,14 +67,17 @@ public class View {
                 System.out.println("Sending an itemidentifier which does not exist in the inventory system and should trigger a exception.");
                 currReceiptDTO = contr.enterNewItem(100);
                 printNewItem(currReceiptDTO,100);
-                errorMessages.createFormattedErrorMessage("Created an item that does not exist in the database, exception failed.");
+                String result = errorMessages.createFormattedErrorMessage("Created an item that does not exist in the database, exception failed.");
+                System.out.println(result);
             }
             catch(ItemIdentifierDoesNotExistException exc){
-                errorMessages.createFormattedErrorMessage("Could not register item with itemidentifier " + exc.getItemIdentifier() + " because it does not exist in the database.");
+                String result = errorMessages.createFormattedErrorMessage("Could not register item with itemidentifier " + exc.getItemIdentifier() + " because it does not exist in the database.");
+                System.out.println(result);
                 logger.logExceptionToFile(exc);
             }
             catch(GenericIssueException exc){
-                errorMessages.createFormattedErrorMessage("Could not register item");
+                String result = errorMessages.createFormattedErrorMessage("Could not register item");
+                System.out.println(result);
             }
 
             Double finalPrice = contr.endSale();
@@ -83,11 +89,13 @@ public class View {
             contr.printReceipt(finaReceiptDTO);
         }
         catch(ItemIdentifierDoesNotExistException exc){
-            errorMessages.createFormattedErrorMessage("Could not register item with itemidentifier " + exc.getItemIdentifier() + " because it does not exist in the database.");
+            String result = errorMessages.createFormattedErrorMessage("Could not register item with itemidentifier " + exc.getItemIdentifier() + " because it does not exist in the database.");
+            System.out.println(result);
             logger.logExceptionToFile(exc);
         }
         catch(Exception exc){
-            errorMessages.createFormattedErrorMessage("An error has occured. Please try again.");
+            String result = errorMessages.createFormattedErrorMessage("An error has occured. Please try again.");
+            System.out.println(result);
             logger.logExceptionToFile(exc);
         }
     }

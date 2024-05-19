@@ -15,14 +15,15 @@ public class ErrorMessageFormatter {
      * 
      * @param errorMessage The error message.
      */
-    void createFormattedErrorMessage(String errorMessage) {
+    public String createFormattedErrorMessage(String errorMessage) {
         StringBuilder formattedErrorMesssageBuilder = new StringBuilder();
         formattedErrorMesssageBuilder.append("REPORTED ERROR: ");
         formattedErrorMesssageBuilder.append(errorMessage);
         formattedErrorMesssageBuilder.append("\n");
         formattedErrorMesssageBuilder.append("Time and date of ERROR: ");
         formattedErrorMesssageBuilder.append(createStringForTimeAndDate());
-        System.out.println(formattedErrorMesssageBuilder);
+        //System.out.println(formattedErrorMesssageBuilder);
+        return formattedErrorMesssageBuilder.toString();
     }
 
     /**
