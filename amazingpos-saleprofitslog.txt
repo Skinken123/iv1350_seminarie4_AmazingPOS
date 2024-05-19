@@ -6,3 +6,19 @@ A new sale was made at time: 2024-05-19, 21:28
 The total price of the sale was: 57.5 SEK
 Total profits since program started: 115.0 SEK
 
+A new sale was made at time: 2024-05-19, 22:35
+The total price of the sale was: 57.5 SEK
+Total profits since program started: 57.5 SEK
+
+A new sale was made at time: 2024-05-19, 22:35
+The total price of the sale was: 57.5 SEK
+Total profits since program started: 115.0 SEK
+
+A new sale was made at time: 2024-05-19, 22:36
+The total price of the sale was: 57.5 SEK
+Total profits since program started: 57.5 SEK
+
+A new sale was made at time: 2024-05-19, 22:36
+The total price of the sale was: 57.5 SEK
+Total profits since program started: 115.0 SEK
+

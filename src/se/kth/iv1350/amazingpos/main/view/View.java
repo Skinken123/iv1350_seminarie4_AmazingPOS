@@ -85,11 +85,11 @@ public class View {
             Double finalPrice = contr.endSale();
             System.out.println("The final price is (including VAT): " + finalPrice + " SEK" + "\n");
             double payment = 200;
-            System.out.println("Customer pays: " + payment + " SEK");
+            System.out.println("Customer pays: " + payment + " SEK\n");
             ReceiptDTO finaReceiptDTO = contr.payment(payment);
 
             contr.printReceipt(finaReceiptDTO);
-
+            System.out.println("\n");
             //Second test run just for testing the observer pattern.
             contr.startSale();
             contr.enterNewItem(1);
