@@ -61,6 +61,50 @@ public class ExternalInventorySystemTest {
         assertFalse(expected.getItemName().equals(result.getItemName()), "The itemName is the same");
         assertFalse(expected.getItemDescription().equals(result.getItemDescription()), "The itemDescription is the same");
     }
+
+    /**
+     * This method tests that the database failure exception is thrown correctly.
+     */
+    @Test
+    public void testRequestItemDataDatabaseFailureException() {
+        try{
+            externalInventorySystem.requestItemData(10);
+            fail("The database failure exception was not thrown");
+        } catch (DatabaseFailureException exc) {
+            assertTrue(exc.getMessage().contains("System failure, could not fetch item data from the inventory system."), "The message is not correct");
+        } catch (ItemIdentifierDoesNotExistException exc) {
+            fail("The wrong exception was thrown");
+        }
+    }
+
+    /**
+     * This method tests that the item identifier exception is thrown correctly.
+     */
+    @Test
+    public void testItemIdentifierException() {
+        try{
+            externalInventorySystem.requestItemData(100);
+            fail("The item identifier exception was not thrown");
+        } catch (ItemIdentifierDoesNotExistException exc) {
+            assertTrue(exc.getMessage().contains("The item with the identifier 100 does not exist."), "The message is not correct");
+        } catch (DatabaseFailureException exc) {
+            fail("The wrong exception was thrown");
+        }
+    }
+
+    /**
+     * This method tests that no exception is thrown when the correct item identifier is used.
+     */
+    @Test
+    public void testNoException() {
+        try{
+            externalInventorySystem.requestItemData(1);
+        } catch (ItemIdentifierDoesNotExistException exc) {
+            fail("The wrong exception was thrown");
+        } catch (DatabaseFailureException exc) {
+            fail("The wrong exception was thrown");
+        }
+    }
     
     /**
      * This method resets the class after each test method is run.

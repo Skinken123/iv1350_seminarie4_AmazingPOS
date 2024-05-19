@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 
 import se.kth.iv1350.amazingpos.main.controller.Controller;
 import se.kth.iv1350.amazingpos.main.controller.GenericIssueException;
+import se.kth.iv1350.amazingpos.main.integration.DatabaseFailureException;
 import se.kth.iv1350.amazingpos.main.integration.ExternalAccountingSystem;
 import se.kth.iv1350.amazingpos.main.integration.ExternalInventorySystem;
 import se.kth.iv1350.amazingpos.main.integration.ExternalSystemsCreator;
@@ -58,9 +59,8 @@ public class ControllerTest {
     @Test
     public void testEnterNewItem() throws ItemIdentifierDoesNotExistException, GenericIssueException {
         controller.startSale();
-        List<ItemDTO> itemList2 = new ArrayList<>();
         ItemDTO item = new ItemDTO(35, 1, "Tomato", "A box of red tomatos", 0.12, 1);
-        itemList2.add(item);
+        itemList.add(item);
         ReceiptDTO result = controller.enterNewItem(1); 
         ReceiptDTO expected = new ReceiptDTO(null, 35.0, 4.2, 0, 0, itemList);
 
@@ -118,6 +118,57 @@ public class ControllerTest {
         assertTrue(result.getChange() == expected.getChange(), "The change is not the same");
         //some bug here or something I dont understand
         //compareLists(result.getCurrentItemList(), expected.getCurrentItemList());
+    }
+
+    /**
+     * This method tests if the itemidentifier exception is thrown correctly in the enterNewItem method in the Controller class.
+     */
+    @Test
+    public void testEnterNewItemIdentifierException(){
+        controller.startSale();
+        try{
+            controller.enterNewItem(100);
+            fail("No exception was thrown");
+        } 
+        catch (ItemIdentifierDoesNotExistException exc) {
+            assertTrue(exc.getMessage().contains("The item with the identifier 100 does not exist."));
+        }
+        catch (GenericIssueException exc) {
+            fail("The wrong exception was thrown");
+        }    
+    }
+
+    /**
+     * This method tests if the database failure exception is thrown correctly in the enterNewItem method in the Controller class.
+     */
+    @Test
+    public void testEnterNewItemDatabaseFailureException(){
+        controller.startSale();
+        try{
+            controller.enterNewItem(10);
+            fail("No exception was thrown");
+        } 
+        catch (GenericIssueException exc) {
+            assertTrue(exc.getMessage().contains("The item could not be entered to the sale"));
+        }
+        catch (ItemIdentifierDoesNotExistException exc) {
+            fail("The wrong exception was thrown");
+        }    
+    }
+
+    /**
+     * This method tests that there is no exception thrown when the enterNewItem method is called with a valid item identifier.
+     */
+    @Test
+    public void enterNewItemNoException() {
+        controller.startSale();
+        try {
+            controller.enterNewItem(1);
+        } catch (ItemIdentifierDoesNotExistException exc) {
+            fail("An exception was thrown");
+        } catch (GenericIssueException exc) {
+            fail("An exception was thrown");
+        }
     }
 
     /**
