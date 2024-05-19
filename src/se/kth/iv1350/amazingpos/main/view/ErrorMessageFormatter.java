@@ -17,9 +17,11 @@ public class ErrorMessageFormatter {
      */
     void createFormattedErrorMessage(String errorMessage) {
         StringBuilder formattedErrorMesssageBuilder = new StringBuilder();
-        formattedErrorMesssageBuilder.append(createStringForTimeAndDate());
-        formattedErrorMesssageBuilder.append(", REPORTED ERROR: ");
+        formattedErrorMesssageBuilder.append("REPORTED ERROR: ");
         formattedErrorMesssageBuilder.append(errorMessage);
+        formattedErrorMesssageBuilder.append("\n");
+        formattedErrorMesssageBuilder.append("Time and date of ERROR: ");
+        formattedErrorMesssageBuilder.append(createStringForTimeAndDate());
         System.out.println(formattedErrorMesssageBuilder);
     }
 

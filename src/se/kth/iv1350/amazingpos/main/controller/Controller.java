@@ -15,7 +15,7 @@ import se.kth.iv1350.amazingpos.main.model.Sale;
 import se.kth.iv1350.amazingpos.main.model.dto.ItemDTO;
 import se.kth.iv1350.amazingpos.main.model.dto.ItemListDTO;
 import se.kth.iv1350.amazingpos.main.model.dto.ReceiptDTO;
-import se.kth.iv1350.amazingpos.main.util.FileLogger;
+import se.kth.iv1350.amazingpos.main.utility.FileLogger;
 
 /**
  * This is the application's only controller. All calls to the model pass through here.
@@ -68,7 +68,7 @@ public class Controller {
         }
         catch(DatabaseFailureException databaseExc)
         {
-            logger.logException(databaseExc);
+            logger.logExceptionToFile(databaseExc);
             throw new GenericIssueException("The item could not be entered to the sale", databaseExc);
         }
         

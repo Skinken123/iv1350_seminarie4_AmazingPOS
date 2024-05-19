@@ -30,3 +30,51 @@ se.kth.iv1350.amazingpos.main.integration.ItemIdentifierDoesNotExistException: T
 	at se.kth.iv1350.amazingpos.main.startup.Main.main(Main.java:27)
 
 
+2024-05-19, 13:16, Exception was thrown: System failure, could not fetch item data from the inventory system.
+se.kth.iv1350.amazingpos.main.integration.DatabaseFailureException: System failure, could not fetch item data from the inventory system.
+	at se.kth.iv1350.amazingpos.main.integration.ExternalInventorySystem.requestItemData(ExternalInventorySystem.java:25)
+	at se.kth.iv1350.amazingpos.main.controller.Controller.enterNewItem(Controller.java:65)
+	at se.kth.iv1350.amazingpos.main.view.View.sampleExecution(View.java:51)
+	at se.kth.iv1350.amazingpos.main.startup.Main.main(Main.java:27)
+
+
+2024-05-19, 13:16, Exception was thrown: The item with the identifier 100 does not exist.
+se.kth.iv1350.amazingpos.main.integration.ItemIdentifierDoesNotExistException: The item with the identifier 100 does not exist.
+	at se.kth.iv1350.amazingpos.main.integration.ExternalInventorySystem.requestItemData(ExternalInventorySystem.java:28)
+	at se.kth.iv1350.amazingpos.main.controller.Controller.enterNewItem(Controller.java:65)
+	at se.kth.iv1350.amazingpos.main.view.View.sampleExecution(View.java:65)
+	at se.kth.iv1350.amazingpos.main.startup.Main.main(Main.java:27)
+
+
+2024-05-19, 13:17, Exception was thrown: System failure, could not fetch item data from the inventory system.
+se.kth.iv1350.amazingpos.main.integration.DatabaseFailureException: System failure, could not fetch item data from the inventory system.
+	at se.kth.iv1350.amazingpos.main.integration.ExternalInventorySystem.requestItemData(ExternalInventorySystem.java:25)
+	at se.kth.iv1350.amazingpos.main.controller.Controller.enterNewItem(Controller.java:65)
+	at se.kth.iv1350.amazingpos.main.view.View.sampleExecution(View.java:51)
+	at se.kth.iv1350.amazingpos.main.startup.Main.main(Main.java:27)
+
+
+2024-05-19, 13:17, Exception was thrown: The item with the identifier 100 does not exist.
+se.kth.iv1350.amazingpos.main.integration.ItemIdentifierDoesNotExistException: The item with the identifier 100 does not exist.
+	at se.kth.iv1350.amazingpos.main.integration.ExternalInventorySystem.requestItemData(ExternalInventorySystem.java:28)
+	at se.kth.iv1350.amazingpos.main.controller.Controller.enterNewItem(Controller.java:65)
+	at se.kth.iv1350.amazingpos.main.view.View.sampleExecution(View.java:65)
+	at se.kth.iv1350.amazingpos.main.startup.Main.main(Main.java:27)
+
+
+2024-05-19, 13:17, Exception was thrown: System failure, could not fetch item data from the inventory system.
+se.kth.iv1350.amazingpos.main.integration.DatabaseFailureException: System failure, could not fetch item data from the inventory system.
+	at se.kth.iv1350.amazingpos.main.integration.ExternalInventorySystem.requestItemData(ExternalInventorySystem.java:25)
+	at se.kth.iv1350.amazingpos.main.controller.Controller.enterNewItem(Controller.java:65)
+	at se.kth.iv1350.amazingpos.main.view.View.sampleExecution(View.java:51)
+	at se.kth.iv1350.amazingpos.main.startup.Main.main(Main.java:27)
+
+
+2024-05-19, 13:17, Exception was thrown: The item with the identifier 100 does not exist.
+se.kth.iv1350.amazingpos.main.integration.ItemIdentifierDoesNotExistException: The item with the identifier 100 does not exist.
+	at se.kth.iv1350.amazingpos.main.integration.ExternalInventorySystem.requestItemData(ExternalInventorySystem.java:28)
+	at se.kth.iv1350.amazingpos.main.controller.Controller.enterNewItem(Controller.java:65)
+	at se.kth.iv1350.amazingpos.main.view.View.sampleExecution(View.java:65)
+	at se.kth.iv1350.amazingpos.main.startup.Main.main(Main.java:27)
+
+
