@@ -1,19 +1,17 @@
-package se.kth.iv1350.amazingpos.main.integration;
+package se.kth.iv1350.amazingpos.main.integration.printing;
 
 import se.kth.iv1350.amazingpos.main.model.dto.ItemDTO;
 import se.kth.iv1350.amazingpos.main.model.dto.ReceiptDTO;
 
 /**
- * Represents a class which will handle communication with the receipt printer.
+ * Represents a class which will print the receipt in english.
  */
-
-public class ReceiptPrinter {
+public class EnglishPrint implements Printer{
     /**
-     * Calls the receipt printer to print the receipt. This method will also print the receipt to the console to give feedback to the view.
-     * 
-     * @param receipt the object containing all information that needs to be on the receipt.
+     * Prints an english version of the receipt.
      */
-    public void printReceipt(ReceiptDTO receiptDTO) {
+    @Override
+    public void print(ReceiptDTO receiptDTO) {
         System.out.println("Receipt: ");
         System.out.println("Sale time: " + receiptDTO.getSaleTime());
         for (ItemDTO item : receiptDTO.getCurrentItemList()) {
