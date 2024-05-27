@@ -6,7 +6,9 @@ import se.kth.iv1350.amazingpos.main.model.dto.ReceiptDTO;
 /**
  * Represents a class which will print the receipt in english.
  */
-public class EnglishPrint implements Printer{
+class EnglishPrint implements Printer{
+    EnglishPrint() {
+    }
     /**
      * Prints an english version of the receipt.
      */

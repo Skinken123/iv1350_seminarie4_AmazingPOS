@@ -6,7 +6,9 @@ import se.kth.iv1350.amazingpos.main.model.dto.ReceiptDTO;
 /**
  * Represents a class which will print the receipt in swedish.
  */
-public class SwedishPrint implements Printer{
+class SwedishPrint implements Printer{
+    SwedishPrint() {
+    }
     /**
      * Prints an swedish version of the receipt.
      */

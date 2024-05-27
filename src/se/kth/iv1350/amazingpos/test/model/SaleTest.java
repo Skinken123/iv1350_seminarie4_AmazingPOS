@@ -1,7 +1,10 @@
 package se.kth.iv1350.amazingpos.test.model;
 
 import java.util.List;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
 import java.util.ArrayList;
 
 import se.kth.iv1350.amazingpos.main.model.Receipt;
@@ -49,7 +52,7 @@ public class SaleTest {
         ItemDTO item = new ItemDTO(10, 1, "Milk", "1L", 0.12, 1);
         itemList.add(item);
         ReceiptDTO result = sale.uppdateItemList(item);
-        ReceiptDTO expected = new ReceiptDTO(saleTime, 10.0, 1.2, payment, change, itemList);
+        ReceiptDTO expected = new ReceiptDTO(createStringForTimeAndDate(), 10.0, 1.2, payment, change, itemList);
          
         double resPrice = result.getTotalPrice();
         double expPrice = expected.getTotalPrice();
@@ -67,8 +70,8 @@ public class SaleTest {
         double expChange = expected.getChange();
         assertTrue(resChange == expChange, "The change is not the same");
 
-        LocalTime resTime = result.getSaleTime();
-        LocalTime expTime = expected.getSaleTime();
+        String resTime = result.getSaleTime();
+        String expTime = expected.getSaleTime();
         assertTrue(resTime == expTime, "The sale time is not the same");
 
         List<ItemDTO> resItemList = result.getCurrentItemList();
@@ -105,7 +108,7 @@ public class SaleTest {
         itemList.add(item);
         sale.uppdateItemList(item);
         ReceiptDTO result = sale.getFinalReceiptDTO(100, 50);
-        ReceiptDTO expected = new ReceiptDTO(LocalTime.now(), 10.0, 1.2, 100, 50, itemList);
+        ReceiptDTO expected = new ReceiptDTO(createStringForTimeAndDate(), 10.0, 1.2, 100, 50, itemList);
         
         double resPrice = result.getTotalPrice();
         double expPrice = expected.getTotalPrice();
@@ -140,5 +143,17 @@ public class SaleTest {
         receipt = null;
         itemList = null;
         saleTime = null;
+    }
+
+    /**
+     * Creates a string with the current date and time by getting the current date and time and changing the format to be more clear and readable.
+     * 
+     * @return The current date and time as a string.
+     */
+    private String createStringForTimeAndDate() {
+        LocalDateTime currentDateAndTime = LocalDateTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.SHORT);
+        String formattedDateTime = currentDateAndTime.format(formatter);
+        return formattedDateTime;
     }
 }

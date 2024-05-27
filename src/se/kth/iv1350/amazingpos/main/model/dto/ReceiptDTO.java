@@ -8,7 +8,7 @@ import java.util.List;
  * used for sending information about an instance of the receipt class though packages.
  */
 public class ReceiptDTO {
-    private LocalTime saleTime;
+    private String saleTime;
     private double totalPrice;
     private double totalVAT;
     private double payment;
@@ -25,7 +25,7 @@ public class ReceiptDTO {
      * @param change The change of the sale.
      * @param basicItemList The list of items in the sale.
      */
-    public ReceiptDTO(LocalTime saleTime, double totalPrice, double totalVAT, double payment, double change, List<ItemDTO> currentItemList) {
+    public ReceiptDTO(String saleTime, double totalPrice, double totalVAT, double payment, double change, List<ItemDTO> currentItemList) {
         this.saleTime = saleTime;
         this.totalPrice = totalPrice;
         this.totalVAT = totalVAT;
@@ -39,7 +39,7 @@ public class ReceiptDTO {
      * 
      * @return The time of the sale.
      */
-    public LocalTime getSaleTime() {
+    public String getSaleTime() {
         return saleTime;
     }
 

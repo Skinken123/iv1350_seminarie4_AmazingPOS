@@ -19,10 +19,16 @@ import java.time.format.FormatStyle;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.AfterEach;
 
+/**
+ * This is the class that will test all of the non constructor/get/set methods in the FileLogger class.
+ */
 public class FileLoggerTest {
     private FileLogger fileLogger;
     private String logFile = "amazingpos-errorlog.txt";
 
+    /**
+     * This method sets up the test class before each test method is run.
+     */
     @BeforeEach
     public void setUp() {
         try {
@@ -32,6 +38,10 @@ public class FileLoggerTest {
         }
     }
 
+    /**
+     * This method tests the logExceptionToFile method in the FileLogger class.
+     * @throws IOException If the log file could not be read.
+     */
     @Test
     public void testLog() throws IOException {
         ItemIdentifierDoesNotExistException exception = new ItemIdentifierDoesNotExistException(78);
@@ -45,6 +55,9 @@ public class FileLoggerTest {
         assertTrue(checkIfLogContains(formattedDateTime), "The log file does not contain the expected string: " + formattedDateTime);
     }
 
+    /**
+     * This method resets the fileLogger to null after each test method is run.
+     */
     @AfterEach
     public void tearDown() {
         fileLogger = null;

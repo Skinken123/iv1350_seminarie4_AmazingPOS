@@ -6,7 +6,7 @@ import java.io.IOException;
 
 import se.kth.iv1350.amazingpos.main.controller.Controller;
 import se.kth.iv1350.amazingpos.main.integration.ExternalSystemsCreator;
-import se.kth.iv1350.amazingpos.main.integration.ReceiptPrinter;
+import se.kth.iv1350.amazingpos.main.integration.printing.ReceiptPrinter;
 
 /**
  * Contains the <code>main</code> method. Performs all startup of the application.

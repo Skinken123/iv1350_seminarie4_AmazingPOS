@@ -1,6 +1,9 @@
 package se.kth.iv1350.amazingpos.main.model;
 
+import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,7 +14,7 @@ import se.kth.iv1350.amazingpos.main.model.dto.ReceiptDTO;
  * Represents a receipt for a sale, storing most improtant information about the sale.
  */
 public class Receipt {
-    private LocalTime saleTime;
+    private String saleTime;
     private double totalPrice;
     private double totalVAT;
     private double payment;
@@ -45,7 +48,7 @@ public class Receipt {
     /**
      * Sets the time of the sale.
      */
-    public void setSaleTime(LocalTime saleTime) {
+    public void setSaleTime(String saleTime) {
         this.saleTime = saleTime;
     }
 
@@ -115,10 +118,22 @@ public class Receipt {
      */
 
     public ReceiptDTO setSaleTimeAndPayment(double payment, double change){
-        setSaleTime(LocalTime.now());
+        setSaleTime(createStringForTimeAndDate());
         setPayment(payment);
         setChange(change);
         ReceiptDTO finalReceiptDTO = new ReceiptDTO(saleTime, totalPrice, totalVAT, payment, change, currentItemList);
         return finalReceiptDTO;
+    }
+
+     /**
+     * Creates a string with the current date and time by getting the current date and time and changing the format to be more clear and readable.
+     * 
+     * @return The current date and time as a string.
+     */
+    private String createStringForTimeAndDate() {
+        LocalDateTime currentDateAndTime = LocalDateTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.SHORT);
+        String formattedDateTime = currentDateAndTime.format(formatter);
+        return formattedDateTime;
     }
 }

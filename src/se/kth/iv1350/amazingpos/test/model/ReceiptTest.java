@@ -1,6 +1,9 @@
 package se.kth.iv1350.amazingpos.test.model;
 
+import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,7 +31,7 @@ public class ReceiptTest {
     public void setUp() {
         receipt = new Receipt();
         itemList = new ArrayList<>();
-        receipt.setSaleTime(LocalTime.now());
+        receipt.setSaleTime(createStringForTimeAndDate());
         receipt.setTotalPrice(0);
         receipt.setTotalVAT(0);
         receipt.setPayment(0);
@@ -74,5 +77,17 @@ public class ReceiptTest {
     public void tearDown() {
         receipt = null;
         itemList = null;
+    }
+
+    /**
+     * Creates a string with the current date and time by getting the current date and time and changing the format to be more clear and readable.
+     * 
+     * @return The current date and time as a string.
+     */
+    private String createStringForTimeAndDate() {
+        LocalDateTime currentDateAndTime = LocalDateTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.SHORT);
+        String formattedDateTime = currentDateAndTime.format(formatter);
+        return formattedDateTime;
     }
 }

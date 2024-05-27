@@ -9,7 +9,7 @@ import se.kth.iv1350.amazingpos.main.integration.ExternalAccountingSystem;
 import se.kth.iv1350.amazingpos.main.integration.ExternalInventorySystem;
 import se.kth.iv1350.amazingpos.main.integration.ExternalSystemsCreator;
 import se.kth.iv1350.amazingpos.main.integration.ItemIdentifierDoesNotExistException;
-import se.kth.iv1350.amazingpos.main.integration.ReceiptPrinter;
+import se.kth.iv1350.amazingpos.main.integration.printing.ReceiptPrinter;
 import se.kth.iv1350.amazingpos.main.model.Receipt;
 import se.kth.iv1350.amazingpos.main.model.Sale;
 import se.kth.iv1350.amazingpos.main.model.dto.ItemDTO;
@@ -38,10 +38,10 @@ public class ControllerTest {
 
     /**
      * This method sets up the test class before each test method is run.
-     * @throws IOException 
+     * @throws IOException is thrown when the file logger cannot be created.
      */
     @BeforeEach
-    public void setUp() throws IOException {
+    public void setUp() throws IOException  {
         ExternalSystemsCreator creator = new ExternalSystemsCreator();
         printer = new ReceiptPrinter();
         externalAS = new ExternalAccountingSystem();
@@ -53,8 +53,8 @@ public class ControllerTest {
     /**
      * This method test the enterNewItem method in the Controller class.
      * It creates a test object which is the expcted return of the method and compares it to the actual return of the method.
-     * @throws GenericIssueException 
-     * @throws ItemIdentifierDoesNotExistException 
+     * @throws GenericIssueException is thrown when the item could not be entered to the sale.
+     * @throws ItemIdentifierDoesNotExistException is thrown when the item identifier does not match any item in the database.
      */
     @Test
     public void testEnterNewItem() throws ItemIdentifierDoesNotExistException, GenericIssueException {
@@ -75,8 +75,8 @@ public class ControllerTest {
     /**
      * This method test the endSale method in the Controller class.
      * It makes sure that the total price is correct by simulating a small sale scenario and comparing the expected cost to the one retuned by the method.
-     * @throws GenericIssueException 
-     * @throws ItemIdentifierDoesNotExistException 
+     * @throws GenericIssueException is thrown when the item could not be entered to the sale.
+     * @throws ItemIdentifierDoesNotExistException is thrown when the item identifier does not match any item in the database.
      */
     @Test
     public void testEndSale() throws ItemIdentifierDoesNotExistException, GenericIssueException {
@@ -92,8 +92,8 @@ public class ControllerTest {
     /**
      * This method test the payment method in the Controller class.
      * It simulates a shot sale scenario and compares the expected receipt to the one returned by the method.
-     * @throws GenericIssueException 
-     * @throws ItemIdentifierDoesNotExistException 
+     * @throws GenericIssueException is thrown when the item could not be entered to the sale.
+     * @throws ItemIdentifierDoesNotExistException is thrown when the item identifier does not match any item in the database.
      */
     @Test
     public void testPayment() throws ItemIdentifierDoesNotExistException, GenericIssueException{

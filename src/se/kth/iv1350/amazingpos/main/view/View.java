@@ -26,7 +26,7 @@ public class View {
      * Creates a new instance of the view.
      * 
      * @param contr The controller that is used for all calls from the view.
-     * @throws IOException 
+     * @throws IOException is thrown if the file logger cannot be created.
      */
     public View(Controller contr) throws IOException {
         this.contr = contr;

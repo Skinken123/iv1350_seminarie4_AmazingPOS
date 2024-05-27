@@ -10,7 +10,7 @@ import se.kth.iv1350.amazingpos.main.integration.ExternalAccountingSystem;
 import se.kth.iv1350.amazingpos.main.integration.ExternalInventorySystem;
 import se.kth.iv1350.amazingpos.main.integration.ExternalSystemsCreator;
 import se.kth.iv1350.amazingpos.main.integration.ItemIdentifierDoesNotExistException;
-import se.kth.iv1350.amazingpos.main.integration.ReceiptPrinter;
+import se.kth.iv1350.amazingpos.main.integration.printing.ReceiptPrinter;
 import se.kth.iv1350.amazingpos.main.model.Receipt;
 import se.kth.iv1350.amazingpos.main.model.Sale;
 import se.kth.iv1350.amazingpos.main.model.SaleObserver;
@@ -62,7 +62,8 @@ public class Controller {
      * @param quantity The quantity of the item that is to be entered.
      * @return The DTO of the current receipt information after the item has been entered. 
      * The dto will be used by the view to display the updated sale infromation to the cashier and customer.
-     * @throws GenericIssueException 
+     * @throws GenericIssueException is thrown when the item could not be entered to the sale.
+     * @throws ItemIdentifierDoesNotExistException is thrown when the item identifier does not match any of the items in the database.
      */
     public ReceiptDTO enterNewItem(int itemIdentifier) throws ItemIdentifierDoesNotExistException, GenericIssueException{
         try{

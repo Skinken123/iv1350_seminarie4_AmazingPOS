@@ -29,8 +29,8 @@ public class ExternalInventorySystemTest {
      * This method tests the requestItemData method in the ExternalInventorySystem class.
      * It creates a test object which is the expcted return of the method and compares it to the actual return of the method.
      * It comfirms if the return is correct by each individual attribute of the two objects.
-     * @throws DatabaseFailureException 
-     * @throws ItemIdentifierDoesNotExistException 
+     * @throws DatabaseFailureException is thrown when the database could not be reached.
+     * @throws ItemIdentifierDoesNotExistException is thrown when the item identifier does not match any item in the database.
      */
     @Test
     public void testRequestItemDataCorrectItemIdentifier() throws ItemIdentifierDoesNotExistException, DatabaseFailureException {
@@ -49,11 +49,11 @@ public class ExternalInventorySystemTest {
      * It creates a test object which is the not the expcted return of the method and compares it to the actual return of the method.
      * It comfirms that the return is not equal to the incorrect object created, by checking each individual attribute of the two objects.
      * We ignore testing the taxVAT and price since these attributes can be the same in multiple items, but the 3 other attribute are always unique.
-     * @throws DatabaseFailureException 
-     * @throws ItemIdentifierDoesNotExistException 
+     * @throws DatabaseFailureException is thrown when the database could not be reached.
+     * @throws ItemIdentifierDoesNotExistException is thrown when the item identifier does not match any item in the database.
      */
     @Test
-    public void testRequestItemDataIncorrectItemIdentifier() throws ItemIdentifierDoesNotExistException, DatabaseFailureException {
+    public void testRequestItemDataIncorrectItemIdentifier() throws ItemIdentifierDoesNotExistException, DatabaseFailureException  {
         ItemDTO expected = new ItemDTO(35, 1, "Tomato", "A box of red tomatos", 0.12, 1);
         ItemDTO result = externalInventorySystem.requestItemData(3);
 

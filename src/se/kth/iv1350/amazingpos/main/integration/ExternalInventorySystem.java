@@ -15,8 +15,8 @@ public class ExternalInventorySystem {
      * In order to test diffrent scenarios the program we will return different items depending on the itemIdentifier.
      * 
      * @param itemIdentifier The identifier of the item scanned by the cashier.
-     * @throws ItemIdentifierDoesNotExistException 
-     * @throws DatabaseFailureException 
+     * @throws ItemIdentifierDoesNotExistException is thrown if the item identifier does not match any of the items in the database.
+     * @throws DatabaseFailureException is thrown if the database fails to perform a requested operation.
      */
     public ItemDTO requestItemData(int itemIdentifier) throws ItemIdentifierDoesNotExistException, DatabaseFailureException {
         //some code that fetches the item data from the inventory system
