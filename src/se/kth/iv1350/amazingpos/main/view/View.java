@@ -45,8 +45,6 @@ public class View {
 
             ReceiptDTO currReceiptDTO = contr.enterNewItem(1);
             printNewItem(currReceiptDTO,1);
-            currReceiptDTO = contr.enterNewItem(2);
-            printNewItem(currReceiptDTO,2);
 
             try{
                 System.out.println("Sending an itemidentifier which should trigger a database faliure.");
@@ -90,12 +88,6 @@ public class View {
 
             contr.printReceipt(finaReceiptDTO);
             System.out.println("\n");
-            //Second test run just for testing the observer pattern.
-            contr.startSale();
-            contr.enterNewItem(1);
-            contr.enterNewItem(2);
-            contr.endSale();
-            contr.payment(200);
         }
         catch(ItemIdentifierDoesNotExistException exc){
             String result = errorMessages.createFormattedErrorMessage("Could not register item with itemidentifier " + exc.getItemIdentifier() + " because it does not exist in the database.");

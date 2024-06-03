@@ -46,6 +46,6 @@ public class ExternalAccountingSystemTest {
         externalAccountingSystem.updateAccountingSystem(testReceipt);
         String result = outContent.toString();
 
-        assertTrue(result.contains("Accounting system updated."));
+        assertTrue(result.contains("Accounting system updated."), "Wrong printout.");
     }
 }

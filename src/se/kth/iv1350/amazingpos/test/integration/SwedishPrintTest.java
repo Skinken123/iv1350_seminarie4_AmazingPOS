@@ -54,12 +54,12 @@ public class SwedishPrintTest {
         testPrinter.printReceipt(testReceipt);
         String result = outContent.toString();
 
-        assertTrue(result.contains("Kvitto:"));
-        assertTrue(result.contains("Tid vid köp: Test"));
-        assertTrue(result.contains("Tomato"));
-        assertTrue(result.contains("Totalt pris (inkluderande moms): 0.0 SEK"));
-        assertTrue(result.contains("Total moms: 0.0 SEK"));
-        assertTrue(result.contains("Betalning: 0.0 SEK"));
-        assertTrue(result.contains("Växel: 0.0 SEK"));
+        assertTrue(result.contains("Kvitto:"), "Wrong printout.");
+        assertTrue(result.contains("Tid vid köp: Test"), "Wrong printout.");
+        assertTrue(result.contains("Tomato"), "Wrong printout.");
+        assertTrue(result.contains("Totalt pris (inkluderande moms): 0.0 SEK"), "Wrong printout.");
+        assertTrue(result.contains("Total moms: 0.0 SEK"), "Wrong printout.");
+        assertTrue(result.contains("Betalning: 0.0 SEK"), "Wrong printout.");
+        assertTrue(result.contains("Växel: 0.0 SEK"), "Wrong printout.");
     }
 }
