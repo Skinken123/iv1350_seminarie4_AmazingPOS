@@ -1,0 +1,65 @@
+package se.kth.iv1350.amazingpos.test.integration;
+
+import org.junit.jupiter.api.Test;
+
+import se.kth.iv1350.amazingpos.main.integration.printing.ReceiptPrinter;
+import se.kth.iv1350.amazingpos.main.model.dto.ItemDTO;
+import se.kth.iv1350.amazingpos.main.model.dto.ReceiptDTO;
+
+import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.AfterEach;
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ * Tests the EnglishPrint class gives the correct output.
+ */
+public class EnglishPrintTest {
+    ByteArrayOutputStream outContent;
+    PrintStream originalSysOut;
+    ReceiptPrinter testPrinter;
+
+    /**
+     * Sets up the test class before each test method is run.
+     */
+    @BeforeEach
+    public void setUpStreams() {
+        originalSysOut = System.out;
+        outContent = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(outContent));
+
+        testPrinter = new ReceiptPrinter();
+    }
+
+    /**
+     * Cleans up the test class after each test method is run.
+     */
+    @AfterEach
+    public void cleanUpStreams() {
+        outContent = null;
+        System.setOut(originalSysOut);
+    }
+
+    /**
+     * Tests the print method in the EnglishPrint class.
+     */
+    @Test
+    public void testPrint(){
+        List<ItemDTO> items = new ArrayList<>();
+        items.add(new ItemDTO(1.0, 1, "Tomato", "A box of red tomatos", 0.12, 1));
+        ReceiptDTO testReceipt = new ReceiptDTO("Test", 0, 0, 0, 0, items);
+        testPrinter.printReceipt(testReceipt);
+        String result = outContent.toString();
+
+        assertTrue(result.contains("Receipt:"));
+        assertTrue(result.contains("Sale time: Test"));
+        assertTrue(result.contains("Tomato"));
+        assertTrue(result.contains("Total price (including VAT): 0.0 SEK"));
+        assertTrue(result.contains("Total VAT:   0.0  SEK"));
+        assertTrue(result.contains("Payment: 0.0 SEK"));
+        assertTrue(result.contains("Change: 0.0 SEK"));
+    }
+}

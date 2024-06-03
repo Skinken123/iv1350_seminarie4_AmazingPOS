@@ -4,9 +4,14 @@ import se.kth.iv1350.amazingpos.main.integration.DatabaseFailureException;
 import se.kth.iv1350.amazingpos.main.integration.ExternalInventorySystem;
 import se.kth.iv1350.amazingpos.main.integration.ItemIdentifierDoesNotExistException;
 import se.kth.iv1350.amazingpos.main.model.dto.ItemDTO;
+import se.kth.iv1350.amazingpos.main.model.dto.ItemListDTO;
 
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
+
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.AfterEach;
 
@@ -16,12 +21,18 @@ import org.junit.jupiter.api.AfterEach;
 
 public class ExternalInventorySystemTest {
     private ExternalInventorySystem externalInventorySystem;
+    ByteArrayOutputStream outContent;
+    PrintStream originalSysOut;
 
     /**
      * This method sets up the test class before each test method is run.
      */
     @BeforeEach
     public void setUp() {
+        originalSysOut = System.out;
+        outContent = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(outContent));
+
         externalInventorySystem = new ExternalInventorySystem();
     }
 
@@ -105,6 +116,18 @@ public class ExternalInventorySystemTest {
             fail("The wrong exception was thrown");
         }
     }
+
+    /**
+     * This method tests the updateInventory method in the ExternalInventorySystem class.
+     * It checks if the correct message is printed to the console.
+     */
+    @Test
+    public void testUpdateInventory() {
+        ItemListDTO itemListDTO = new ItemListDTO(null);
+        externalInventorySystem.updateInventory(itemListDTO);
+        String result = outContent.toString();
+        assertTrue(result.contains("The inventory has been updated"), "The message is not correct");
+    }
     
     /**
      * This method resets the class after each test method is run.
@@ -112,6 +135,9 @@ public class ExternalInventorySystemTest {
      */
     @AfterEach
     public void tearDown() {
+        outContent = null;
+        System.setOut(originalSysOut);
+
         externalInventorySystem = null;
     }
     

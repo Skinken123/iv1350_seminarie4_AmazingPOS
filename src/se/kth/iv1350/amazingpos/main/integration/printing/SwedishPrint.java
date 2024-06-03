@@ -21,7 +21,7 @@ class SwedishPrint implements Printer{
         }
         System.out.println("\n");
         System.out.println("Totalt pris (inkluderande moms): " + receiptDTO.getTotalPrice() + " SEK");
-        System.out.println("Total moms:   " + receiptDTO.getTotalVAT()+ "  SEK" + "\n");
+        System.out.println("Total moms: " + receiptDTO.getTotalVAT()+ " SEK" + "\n");
         System.out.println("Betalning: " + receiptDTO.getPayment() + " SEK");
         System.out.println("Växel: " + receiptDTO.getChange() + " SEK");
     }
