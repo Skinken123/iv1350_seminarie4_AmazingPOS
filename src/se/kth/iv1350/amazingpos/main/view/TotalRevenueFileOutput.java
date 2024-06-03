@@ -7,15 +7,12 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 
-import se.kth.iv1350.amazingpos.main.model.SaleObserver;
-
 /**
  * This class is responsible for taking the total revenue from all sales since the program started and logging it to a file.
  */
-public class TotalRevenueFileOutput implements SaleObserver{
+public class TotalRevenueFileOutput extends TotalRevenueOut{
     private static final String LOG_FILE_NAME = "amazingpos-saleprofitslog.txt";
     private PrintWriter fileToLogTo;
-    private double totalRevenue = 0;
 
     public TotalRevenueFileOutput() throws IOException {
         fileToLogTo = new PrintWriter(new FileWriter(LOG_FILE_NAME, true), true);
@@ -26,7 +23,7 @@ public class TotalRevenueFileOutput implements SaleObserver{
      * 
      * @param exception The exception that shall be logged to the file.
      */
-    private void logNewSaleToFile(double totalPriceFromMostRecentSale) {
+    private void logNewSaleToFile(double totalRevenue, double totalPriceFromMostRecentSale) {
         StringBuilder logMessageBuilder = new StringBuilder();
         logMessageBuilder.append("A new sale was made at time: " + createStringForTimeAndDate() + "\n");
         logMessageBuilder.append("The total price of the sale was: " + totalPriceFromMostRecentSale + " SEK\n");
@@ -47,13 +44,24 @@ public class TotalRevenueFileOutput implements SaleObserver{
     }
 
     /**
-     * Updates the total revenue with the most recent sale and logs the new sale to the log file.
+     * Logs the new sale to the log file.
      * 
      * @param totalPriceFromMostRecentSale The total price of the most recent sale.
+     * @param totalRev The total revenue of all sales since the program started.
      */
     @Override
-    public void updateSaleProfits(double totalPriceFromMostRecentSale){
-        totalRevenue += totalPriceFromMostRecentSale;
-        logNewSaleToFile(totalPriceFromMostRecentSale);
+    protected void doShowTotalIncome(double totalRev, double totalPriceFromMostRecentSale) throws Exception {
+        logNewSaleToFile(totalRev, totalPriceFromMostRecentSale);
+    }
+
+    /**
+     * Prints error message to the console if the log file could not be written to.
+     * 
+     * @param e The exception that casued the error.
+     * @param errorMessages The error message formatter that will format the error message.
+     */
+    @Override
+    protected void handelErrors(Exception e, ErrorMessageFormatter errorMessages){
+        System.out.println(errorMessages.createFormattedErrorMessage("Could not log new sale to file."));
     }
 }

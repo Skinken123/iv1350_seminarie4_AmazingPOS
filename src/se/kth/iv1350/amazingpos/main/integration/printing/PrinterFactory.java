@@ -24,6 +24,6 @@ public class PrinterFactory {
      * @return the default printer.
      */
     public Printer getDefaultPrinter() {
-        return defaulPrinter;
+        return englishPrinter;
     }
 }
